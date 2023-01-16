@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Sklep.ViewModel.KoszykViewModel>
+@{
+    ViewBag.Title = "Koszyk";
+    decimal calosc = 0.00M;
+}
+
+<h2>Koszyk</h2>
+
+@using (Html.BeginForm("DodajZamowienieSesja", "Zakupy", FormMethod.Post))
+{
+    <table style="width:100%">
+        @if (Model != null)
+        {
+            foreach (var przedmiot in Model)
+            {
+                calosc += przedmiot.Calosc;
+                <tr>
+                    <td>
+                        <img src="@Url.Content(przedmiot.Obrazek)" height="30" width="30">
+                    </td>
+                    <td>
+                        @przedmiot.Nazwa
+                    </td>
+                    <td>
+                        @przedmiot.Ilosc.ToString()
+                    </td>
+                    <td>
+                        @przedmiot.Cena.ToString("#,##0.00")
+                    </td>
+                    <td>
+                        @przedmiot.Calosc.ToString("#,##0.00")
+                    </td>
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="4">
+                <h4>Całość</h4>
+            </td>
+            <td>
+                <h4>@calosc.ToString("#,##0.00")</h4>
+            </td>
+        </tr>
+        @if (Model != null)
+        {
+            <tr style="text-align: right">
+                <td colspan="4">
+                    <input type="submit" value="Zamów" name="zamow" id="zamow"/>
+                </td>
+            </tr>
+        }
+    </table>
+}
+

@@ -1,0 +1,129 @@
+﻿@model Sklep.ViewModel.UzytkownikViewModel
+@{
+    ViewBag.Title = "EdytujKonto";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnDodaj").click(function () {
+            SaveItem();
+        });
+    });
+
+    function ResetItem() {
+        $("#Mail").val("");
+        $("#Imie").val("");
+        $("#Nazwisko").val("");
+        $("#Telefon").val("");
+        $("#Miasto").val("");
+        $("#Ulica").val("");
+        $("#Haslo").val("");
+    }
+    function SaveItem() {
+        var formData = new FormData();
+        formData.append("Mail", $("#Mail").val());
+        formData.append("Imie", $("#Imie").val());
+        formData.append("Nazwisko", $("#Nazwisko").val());
+        formData.append("Telefon", $("#Telefon").val());
+        formData.append("Miasto", $("#Miasto").val());
+        formData.append("Ulica", $("#Ulica").val());
+        formData.append("Haslo", $("#Haslo").val());
+
+        $.ajax({
+            async: true,
+            dataType: 'JSON',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            url: '/Login/EdytujKonto',
+            data: formData,
+            success: function (data) {
+                if (data.Zakonczono) {
+                    alert(data.Wiadomosc);
+                    ResetItem();
+                }
+            },
+            error: function () {
+                alert("BŁĄD: Nie dodano uzytkownika");
+            }
+        });
+    }
+
+</script>
+<h2>Załóż Konto</h2>
+
+
+<div class="container">
+    <table>
+        <tr>
+            <td>
+                Mail:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Mail, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Imie:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Imie, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Nazwisko:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Nazwisko, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Telefon:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Miasto:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Miasto, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Ulica:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Ulica, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Haslo:
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Haslo, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="button" value="Załóż" name="dodaj" id="btnDodaj" />
+            </td>
+        </tr>
+    </table>
+</div>

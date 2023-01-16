@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Sklep.Models.Przedmioty>
+@{
+    ViewBag.Title = "Index";
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3">
+                    Nie ma takich artykułów!
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var przedmiot in Model)
+            {
+                <tr>
+                    <td>
+                        @przedmiot.Nazwa
+                    </td>
+                    <td>
+                        @przedmiot.Opis
+                    </td>
+                    <td>
+                        @przedmiot.Cena
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

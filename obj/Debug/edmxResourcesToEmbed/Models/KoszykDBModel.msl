@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SklepDBModelStoreContainer" CdmEntityContainer="SklepDB_Entities">
+    <EntitySetMapping Name="Kategorie">
+      <EntityTypeMapping TypeName="SklepDBModel.Kategorie">
+        <MappingFragment StoreEntitySet="Kategorie">
+          <ScalarProperty Name="KategoriaID" ColumnName="KategoriaID" />
+          <ScalarProperty Name="KategoriaKod" ColumnName="KategoriaKod" />
+          <ScalarProperty Name="KategoriaNazwa" ColumnName="KategoriaNazwa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Przedmioty">
+      <EntityTypeMapping TypeName="SklepDBModel.Przedmioty">
+        <MappingFragment StoreEntitySet="Przedmioty">
+          <ScalarProperty Name="PrzedmiotID" ColumnName="PrzedmiotID" />
+          <ScalarProperty Name="KategoriaID" ColumnName="KategoriaID" />
+          <ScalarProperty Name="Kod" ColumnName="Kod" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="Obrazek" ColumnName="Obrazek" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hasla">
+      <EntityTypeMapping TypeName="SklepDBModel.Hasla">
+        <MappingFragment StoreEntitySet="Hasla">
+          <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="Hash" ColumnName="Hash" />
+          <ScalarProperty Name="Iteracje" ColumnName="Iteracje" />
+          <ScalarProperty Name="HasloID" ColumnName="HasloID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uzytkownicy">
+      <EntityTypeMapping TypeName="SklepDBModel.Uzytkownicy">
+        <MappingFragment StoreEntitySet="Uzytkownicy">
+          <ScalarProperty Name="CzyAdmin" ColumnName="CzyAdmin" />
+          <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+          <ScalarProperty Name="CzyKonto" ColumnName="CzyKonto" />
+          <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+          <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="UzytkownikID" ColumnName="UzytkownikID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SzczegolyZamownienia">
+      <EntityTypeMapping TypeName="SklepDBModel.SzczegolyZamownienia">
+        <MappingFragment StoreEntitySet="SzczegolyZamownienia">
+          <ScalarProperty Name="Calosc" ColumnName="Calosc" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+          <ScalarProperty Name="PrzedmiotID" ColumnName="PrzedmiotID" />
+          <ScalarProperty Name="ZamownienieID" ColumnName="ZamownienieID" />
+          <ScalarProperty Name="SzczegolyZamownieniaID" ColumnName="SzczegolyZamownieniaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zamowienia">
+      <EntityTypeMapping TypeName="SklepDBModel.Zamowienia">
+        <MappingFragment StoreEntitySet="Zamowienia">
+          <ScalarProperty Name="CzyZrealizowano" ColumnName="CzyZrealizowano" />
+          <ScalarProperty Name="UzytkownikID" ColumnName="UzytkownikID" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="ZamowienieID" ColumnName="ZamowienieID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SklepDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="KategoriaID" />
+          </Key>
+          <Property Name="KategoriaID" Type="int" Nullable="false" />
+          <Property Name="KategoriaKod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KategoriaNazwa" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Przedmioty">
+          <Key>
+            <PropertyRef Name="PrzedmiotID" />
+          </Key>
+          <Property Name="PrzedmiotID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KategoriaID" Type="int" Nullable="false" />
+          <Property Name="Kod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="250" />
+          <Property Name="Obrazek" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Cena" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hasla">
+          <Key>
+            <PropertyRef Name="HasloID" />
+          </Key>
+          <Property Name="HasloID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Iteracje" Type="int" Nullable="false" />
+          <Property Name="Hash" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Haslo" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uzytkownicy">
+          <Key>
+            <PropertyRef Name="UzytkownikID" />
+          </Key>
+          <Property Name="UzytkownikID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Miasto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ulica" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CzyKonto" Type="bit" Nullable="false" />
+          <Property Name="CzyAdmin" Type="bit" />
+          <Property Name="Haslo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SzczegolyZamownienia">
+          <Key>
+            <PropertyRef Name="SzczegolyZamownieniaID" />
+          </Key>
+          <Property Name="SzczegolyZamownieniaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZamownienieID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PrzedmiotID" Type="varchar" MaxLength="550" Nullable="false" />
+          <Property Name="Ilosc" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cena" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Calosc" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="ZamowienieID" />
+          </Key>
+          <Property Name="ZamowienieID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="UzytkownikID" Type="uniqueidentifier" />
+          <Property Name="CzyZrealizowano" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="SklepDBModelStoreContainer">
+          <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="Master" store:Type="Tables" />
+          <EntitySet Name="Przedmioty" EntityType="Self.Przedmioty" Schema="Master" store:Type="Tables" />
+          <EntitySet Name="Hasla" EntityType="Self.Hasla" Schema="Uzytkownicy" store:Type="Tables" />
+          <EntitySet Name="Uzytkownicy" EntityType="Self.Uzytkownicy" Schema="Uzytkownicy" store:Type="Tables" />
+          <EntitySet Name="SzczegolyZamownienia" EntityType="Self.SzczegolyZamownienia" Schema="Zamownienia" store:Type="Tables" />
+          <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" Schema="Zamownienia" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SklepDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="KategoriaID" />
+          </Key>
+          <Property Name="KategoriaID" Type="Int32" Nullable="false" />
+          <Property Name="KategoriaKod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KategoriaNazwa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Przedmioty">
+          <Key>
+            <PropertyRef Name="PrzedmiotID" />
+          </Key>
+          <Property Name="PrzedmiotID" Type="Guid" Nullable="false" />
+          <Property Name="KategoriaID" Type="Int32" Nullable="false" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Obrazek" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cena" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SklepDB_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kategorie" EntityType="Self.Kategorie" />
+          <EntitySet Name="Przedmioty" EntityType="Self.Przedmioty" />
+          <EntitySet Name="Hasla" EntityType="SklepDBModel.Hasla" />
+          <EntitySet Name="Uzytkownicy" EntityType="SklepDBModel.Uzytkownicy" />
+          <EntitySet Name="SzczegolyZamownienia" EntityType="SklepDBModel.SzczegolyZamownienia" />
+          <EntitySet Name="Zamowienia" EntityType="SklepDBModel.Zamowienia" />
+        </EntityContainer>
+        <EntityType Name="Hasla">
+          <Key>
+            <PropertyRef Name="HasloID" />
+          </Key>
+          <Property Name="HasloID" Type="Guid" Nullable="false" />
+          <Property Name="Iteracje" Type="Int32" Nullable="false" />
+          <Property Name="Hash" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Haslo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Uzytkownicy">
+          <Key>
+            <PropertyRef Name="UzytkownikID" />
+          </Key>
+          <Property Name="UzytkownikID" Type="Guid" Nullable="false" />
+          <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Imie" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nazwisko" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Miasto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ulica" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CzyKonto" Type="Boolean" Nullable="false" />
+          <Property Name="Haslo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CzyAdmin" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SzczegolyZamownienia">
+          <Key>
+            <PropertyRef Name="SzczegolyZamownieniaID" />
+          </Key>
+          <Property Name="SzczegolyZamownieniaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZamownienieID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PrzedmiotID" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="false" />
+          <Property Name="Ilosc" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Cena" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Calosc" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="ZamowienieID" />
+          </Key>
+          <Property Name="ZamowienieID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UzytkownikID" Type="Guid" />
+          <Property Name="CzyZrealizowano" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SklepDBModelStoreContainer" CdmEntityContainer="SklepDB_Entities">
+          <EntitySetMapping Name="Kategorie">
+            <EntityTypeMapping TypeName="SklepDBModel.Kategorie">
+              <MappingFragment StoreEntitySet="Kategorie">
+                <ScalarProperty Name="KategoriaID" ColumnName="KategoriaID" />
+                <ScalarProperty Name="KategoriaKod" ColumnName="KategoriaKod" />
+                <ScalarProperty Name="KategoriaNazwa" ColumnName="KategoriaNazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Przedmioty">
+            <EntityTypeMapping TypeName="SklepDBModel.Przedmioty">
+              <MappingFragment StoreEntitySet="Przedmioty">
+                <ScalarProperty Name="PrzedmiotID" ColumnName="PrzedmiotID" />
+                <ScalarProperty Name="KategoriaID" ColumnName="KategoriaID" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Obrazek" ColumnName="Obrazek" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hasla">
+            <EntityTypeMapping TypeName="SklepDBModel.Hasla">
+              <MappingFragment StoreEntitySet="Hasla">
+                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="Iteracje" ColumnName="Iteracje" />
+                <ScalarProperty Name="HasloID" ColumnName="HasloID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uzytkownicy">
+            <EntityTypeMapping TypeName="SklepDBModel.Uzytkownicy">
+              <MappingFragment StoreEntitySet="Uzytkownicy">
+                <ScalarProperty Name="CzyAdmin" ColumnName="CzyAdmin" />
+                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+                <ScalarProperty Name="CzyKonto" ColumnName="CzyKonto" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="UzytkownikID" ColumnName="UzytkownikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SzczegolyZamownienia">
+            <EntityTypeMapping TypeName="SklepDBModel.SzczegolyZamownienia">
+              <MappingFragment StoreEntitySet="SzczegolyZamownienia">
+                <ScalarProperty Name="Calosc" ColumnName="Calosc" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+                <ScalarProperty Name="PrzedmiotID" ColumnName="PrzedmiotID" />
+                <ScalarProperty Name="ZamownienieID" ColumnName="ZamownienieID" />
+                <ScalarProperty Name="SzczegolyZamownieniaID" ColumnName="SzczegolyZamownieniaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zamowienia">
+            <EntityTypeMapping TypeName="SklepDBModel.Zamowienia">
+              <MappingFragment StoreEntitySet="Zamowienia">
+                <ScalarProperty Name="CzyZrealizowano" ColumnName="CzyZrealizowano" />
+                <ScalarProperty Name="UzytkownikID" ColumnName="UzytkownikID" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ZamowienieID" ColumnName="ZamowienieID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

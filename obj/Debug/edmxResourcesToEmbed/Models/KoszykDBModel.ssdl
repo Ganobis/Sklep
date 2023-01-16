@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SklepDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategorie">
+    <Key>
+      <PropertyRef Name="KategoriaID" />
+    </Key>
+    <Property Name="KategoriaID" Type="int" Nullable="false" />
+    <Property Name="KategoriaKod" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="KategoriaNazwa" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Przedmioty">
+    <Key>
+      <PropertyRef Name="PrzedmiotID" />
+    </Key>
+    <Property Name="PrzedmiotID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="KategoriaID" Type="int" Nullable="false" />
+    <Property Name="Kod" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nazwa" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Opis" Type="nvarchar" MaxLength="250" />
+    <Property Name="Obrazek" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Cena" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hasla">
+    <Key>
+      <PropertyRef Name="HasloID" />
+    </Key>
+    <Property Name="HasloID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Iteracje" Type="int" Nullable="false" />
+    <Property Name="Hash" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salt" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Haslo" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Uzytkownicy">
+    <Key>
+      <PropertyRef Name="UzytkownikID" />
+    </Key>
+    <Property Name="UzytkownikID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Imie" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Telefon" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Miasto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ulica" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CzyKonto" Type="bit" Nullable="false" />
+    <Property Name="CzyAdmin" Type="bit" />
+    <Property Name="Haslo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SzczegolyZamownienia">
+    <Key>
+      <PropertyRef Name="SzczegolyZamownieniaID" />
+    </Key>
+    <Property Name="SzczegolyZamownieniaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ZamownienieID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PrzedmiotID" Type="varchar" MaxLength="550" Nullable="false" />
+    <Property Name="Ilosc" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Cena" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Calosc" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Zamowienia">
+    <Key>
+      <PropertyRef Name="ZamowienieID" />
+    </Key>
+    <Property Name="ZamowienieID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Data" Type="datetime" Nullable="false" />
+    <Property Name="UzytkownikID" Type="uniqueidentifier" />
+    <Property Name="CzyZrealizowano" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="SklepDBModelStoreContainer">
+    <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="Master" store:Type="Tables" />
+    <EntitySet Name="Przedmioty" EntityType="Self.Przedmioty" Schema="Master" store:Type="Tables" />
+    <EntitySet Name="Hasla" EntityType="Self.Hasla" Schema="Uzytkownicy" store:Type="Tables" />
+    <EntitySet Name="Uzytkownicy" EntityType="Self.Uzytkownicy" Schema="Uzytkownicy" store:Type="Tables" />
+    <EntitySet Name="SzczegolyZamownienia" EntityType="Self.SzczegolyZamownienia" Schema="Zamownienia" store:Type="Tables" />
+    <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" Schema="Zamownienia" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

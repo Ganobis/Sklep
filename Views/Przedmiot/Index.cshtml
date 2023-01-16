@@ -1,0 +1,123 @@
+﻿@model Sklep.ViewModel.PrzedmiotViewModel
+@{
+    if (Session["UzytkownikAdmin"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<link href="~/Content/Tabela.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnDodaj").click(function () {
+            SaveItem();
+        });
+    });
+
+    function ResetItem() {
+        $("#KategoriaID").val("1");
+        $("#Kod").val("");
+        $("#Nazwa").val("");
+        $("#Opis").val("");
+        $("#Obrazek").val("");
+        $("#Cena").val("");
+    }
+    function SaveItem() {
+        var formData = new FormData();
+        formData.append("KategoriaID", $("#KategoriaID").val());
+        formData.append("Kod", $("#Kod").val());
+        formData.append("Nazwa", $("#Nazwa").val());
+        formData.append("Opis", $("#Opis").val());
+        formData.append("Obrazek", $("#Obrazek").get(0).files[0]);
+        formData.append("Cena", $("#Cena").val());
+
+        $.ajax({
+            async: true,
+            dataType: 'JSON',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            url: '/Przedmiot/Index',
+            data: formData,
+            success: function (data) {
+                if (data.Zakonczono) {
+                    alert(data.Wiadomosc);
+                    ResetItem();
+                }
+            },
+            error: function () {
+                alert("BŁĄD: Nie dodano przedmiotu");
+            }
+        });
+    }
+
+</script>
+
+<h2>Dodaj przedmiot</h2>
+
+<div id="formContainer">
+    <table>
+        <tr>
+            <td>
+                Kategoria:
+            </td>
+            <td>
+            @Html.DropDownListFor(model => model.KategoriaID, new SelectList(Model.KategoriaSelectListItems, "Value", "Text"),
+                new { @class = "form-control" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Kod:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Kod, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Nazwa:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Nazwa, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Opis:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Opis, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Obrazek:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Obrazek, new { type = "file", @class = "form-control" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Cena:
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Cena, new { @class = "form-control", autocomplete = "Off" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="button" value="Dodaj" name="dodaj" id="btnDodaj" />
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ASP.NET Sklep</title>
+    <link href="~/Content/Strona.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-1.8.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+</head>
+<body style="background-color:#a3e0e0ce;">
+    <header class="page-header">
+        <hk2>
+            @if (Session["UzytkownikMail"] != null)
+            {
+                <label>Zalogowany jako: @Session["UzytkownikMail"].ToString()</label>
+            }
+        </hk2>
+        <h1>
+            <table>
+                <tr>
+                    <th>@Html.ActionLink("Home", "Index", "Home")</th>
+                    <th>@Html.ActionLink("Zakupy", "Index", "Zakupy")</th>
+                    <th>@Html.ActionLink("Kontakt", "Kontakt", "Home")</th>
+                    <th>@Html.ActionLink("O Stronie", "OStronie", "Home")</th>
+                    @if (Session["UzytkownikAdmin"] != null)
+                    {
+                        <th>@Html.ActionLink("Przedmiot", "Index", "Przedmiot")</th>
+                        <th>@Html.ActionLink("Zamówienia", "Index", "Zamowienia")</th>
+                        <th>@Html.ActionLink("Użytkownicy", "Index", "Uzytkownicy")</th>
+                    }
+                    @if (Session["UzytkownikID"] == null)
+                    {
+                        <th>@Html.ActionLink("Login", "Index", "Login")</th>
+                        <th>@Html.ActionLink("Załóż konto", "EdytujKonto", "Login")</th>
+                    }
+                    @if (Session["UzytkownikID"] != null)
+                    {
+                        <th>@Html.ActionLink("Wyloguj", "LogOut", "Login")</th>
+                    }
+                    @using (Html.BeginForm("Index", "Szukaj", FormMethod.Get))
+                    {
+                        <th>@Html.TextBox("fraza")<input type="submit" value="Szukaj" /></th>
+                    }
+                    @if (Session["UzytkownikID"] != null)
+                    {
+                        <th>@Html.ActionLink("Koszyk", "Koszyk", "Zakupy")</th>
+                    }
+<tr>
+            </table>
+        </h1>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Sklep</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

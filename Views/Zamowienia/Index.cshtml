@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Sklep.Models.Zamowienia>
+@{
+    if (Session["UzytkownikAdmin"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<script>
+    function Zamow(id) {
+        var zamowienieID = $(id).attr("zamowienieID");
+        var formData = new FormData();
+        formData.append("zamowienieID", zamowienieID);
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Zamowienia/Index',
+            success: function (data) {
+                if (data.Sukces) {
+                    alert("Zrealizowano zamówienie.");
+                }
+            },
+            error: function () {
+                alert("Nie zrealizowano, BŁĄD.");
+            }
+        });
+    }
+</script>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Zamówienie ID</th>
+            <th>Data</th>
+            <th>UżytkownikID</th>
+            <th>Czy zrealizowano?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ZamowienieID
+                </td>
+                <td>
+                    @item.Data
+                </td>
+                <td>
+                    @item.UzytkownikID
+                </td>
+                <td>
+                    @if (@item.CzyZrealizowano == false)
+                    {
+                        <input type="button" name="Zatwierdz" value="Zatwierdź" class="btn btn-primary" zamowienieID="@item.ZamowienieID" id="btnZamow" onclick="Zamow(this)" />
+                    }
+                    else
+                    {
+                        @Html.Label("Zrealizowano")
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

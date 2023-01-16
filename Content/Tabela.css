@@ -1,0 +1,30 @@
+﻿#formContainer {
+    width: 100%;
+    margin: auto;
+    float: left;
+}
+
+#formC {
+    width: 100%;
+}
+
+.rows {
+    width: 100%;
+    display: block;
+}
+
+.column {
+    width: 100%;
+    display: inline-block;
+}
+
+.theLabels {
+    width: 30%;
+    float:left;
+}
+
+.theButton {
+    width: 45%;
+    float: right;
+    margin: auto;
+}

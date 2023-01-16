@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Sklep.Models.Uzytkownicy>
+@{
+    if (Session["UzytkownikAdmin"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<table border="1">
+    <thead>
+        <tr>
+            <th>Mail</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Telefon</th>
+            <th>Miasto</th>
+            <th>Ulica</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var osoba in Model)
+        {
+            <tr>
+                <td>
+                    @osoba.Mail
+                </td>
+                <td>
+                    @osoba.Imie
+                </td>
+                <td>
+                    @osoba.Nazwisko
+                </td>
+                <td>
+                    @osoba.Telefon
+                </td>
+                <td>
+                    @osoba.Miasto
+                </td>
+                <td>
+                    @osoba.Ulica
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

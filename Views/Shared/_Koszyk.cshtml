@@ -1,0 +1,12 @@
+﻿
+
+<div>
+    @if (Session["LicznikKoszya"] == null)
+    {
+        @Html.ActionLink("Koszyk", "Koszyk", "Koszyk", new { id = "PrzedmiotKoszyka" })
+    }
+    else
+    {
+        @Html.ActionLink("Koszyk(" + Session["LicznikKoszya"] + ")", "Koszyk", "Koszyk", new { id = "PrzedmiotKoszyka" })
+    }
+</div>
